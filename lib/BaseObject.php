@@ -1,6 +1,6 @@
 <?php
 
-namespace libraries;
+namespace lib;
 
 abstract class BaseObject
 {
