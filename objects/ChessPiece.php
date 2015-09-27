@@ -2,13 +2,15 @@
 
 namespace objects;
 
+use lib\Position;
+
 abstract class ChessPiece
 {
     protected $position;
     protected $name;
     protected $color;
 
-    public function __construct(\lib\Position $position, $color)
+    public function __construct(Position $position, $color)
     {
         $this->position = $position;
         $this->color = $color;
@@ -19,7 +21,7 @@ abstract class ChessPiece
         return $this->position;
     }
 
-    public function setPosition(\lib\Position $position)
+    public function setPosition(Position $position)
     {
         if ($this->checkLegalMove($position)) {
             $this->position = $position;
@@ -30,7 +32,7 @@ abstract class ChessPiece
         }
     }
 
-    protected function checkLegalMove(\lib\Position $position)
+    protected function checkLegalMove(Position $position)
     {
         if ($position->x < 8 && $position->x > 0) {
             if ($position->y < 8 && $position->y > 0) {

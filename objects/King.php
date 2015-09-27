@@ -1,10 +1,14 @@
 <?php
 
-class King extends \objects\ChessPiece
+namespace objects;
+
+use lib\Position;
+
+class King extends ChessPiece
 {
     private $inCheck = false;
-    
-    public function __construct(\lib\Position $position, $color)
+
+    public function __construct(Position $position, $color)
     {
         parent::__construct($position, $color);
         $this->name = "King";
@@ -12,9 +16,9 @@ class King extends \objects\ChessPiece
 
     public function setInCheck($checked)
     {
-        if (!($checked instanceof Boolean))
+        if (!(is_bool($checked)))
         {
-            throw new Exception("Check most be instance of boolean");
+            throw new \Exception("Check must be instance of boolean");
         }
         
         $this->inCheck = $checked;
@@ -26,13 +30,17 @@ class King extends \objects\ChessPiece
     }
 
     /**
-     * @return lib\Position[]
+     * @return Position[]
      */
     public function getMovesList()
     {
-        return array(new lib\Position($this->x + 1, $this->y + 1),
-            new lib\Position($this->x + 1, $this->y - 1),
-            new lib\Position($this->x - 1, $this->y + 1),
-            new lib\Position($this->x - 1, $this->y - 1));
+        return array(new Position($this->position->x + 1, $this->position->y + 1),
+            new Position($this->position->x + 1, $this->position->y - 1),
+            new Position($this->position->x - 1, $this->position->y + 1),
+            new Position($this->position->x - 1, $this->position->y - 1),
+            new Position($this->position->x, $this->position->y + 1),
+            new Position($this->position->x, $this->position->y - 1),
+            new Position($this->position->x + 1, $this->position->y),
+            new Position($this->position->x - 1, $this->position->y));
     }
 }
